@@ -1,11 +1,16 @@
 'use strict';
 
-var allProducts = [];
+var clicksRemaining = 25;
+
 var img1 = document.getElementById('img1');
 var img2 = document.getElementById('img2');
 var img3 = document.getElementById('img3');
 var productBox = document.getElementById('product-box');
+var clicksRemElement = document.getElementById('clicks-remaining');
+var completeElement = document.getElementById('complete');
+
 var allImageElements = [img1, img2, img3];
+var allProducts = [];
 
 // Got index idea from Ed to make finding objects easier
 function Product(name) {
@@ -64,12 +69,28 @@ function showRandomProducts(){
 
 
 function handleProductClick(event){
-  console.log('Clicked Event: ' + event.target.alt);
-  allProducts[event.target.id].clicks ++;
-  showRandomProducts();
+  if (keepGoing()){
+    console.log('Clicked Event: ' + event.target.alt);
+    allProducts[event.target.id].clicks ++;
+    clicksRemaining --;
+    clicksRemElement.innerHTML = clicksRemaining;
+    showRandomProducts();
+  } else {
+    // Used this to figure out why visibility wasn't changing: https://www.w3schools.com/jsref/prop_style_visibility.asp
+    productBox.style.visibility = 'hidden';
+    completeElement.style.visibility = 'visible';
+  }
+
 }
 
-
+function keepGoing(){
+  if(clicksRemaining <= 0){
+    return false;
+  }
+  else {
+    return true;
+  }
+}
 
 
 showRandomProducts();
