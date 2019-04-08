@@ -4,6 +4,7 @@ var allProducts = [];
 var img1 = document.getElementById('img1');
 var img2 = document.getElementById('img2');
 var img3 = document.getElementById('img3');
+var allImageElements = [img1, img2, img3];
 
 function Product(name) {
   this.filepath = `img/${name}.jpg`;
@@ -35,4 +36,15 @@ new Product('water-can');
 new Product('wine-glass');
 
 console.table(allProducts);
+
+function showRandomProducts(){
+
+  for(var i = 0; i < 3; i++){
+    var random = Math.floor(Math.random() * allProducts.length);
+    allImageElements[i].src = allProducts[random].filepath;
+  }
+
+}
+
+showRandomProducts();
 
