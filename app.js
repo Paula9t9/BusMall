@@ -39,11 +39,20 @@ console.table(allProducts);
 
 function showRandomProducts(){
 
+  var previousImgs = [];
   for(var i = 0; i < 3; i++){
-    var random = Math.floor(Math.random() * allProducts.length);
-    allImageElements[i].src = allProducts[random].filepath;
-  }
 
+    do {
+
+      var random = Math.floor(Math.random() * allProducts.length);
+      allImageElements[i].src = allProducts[random].filepath;
+      allImageElements[i].alt = allProducts[random].name;
+      allImageElements[i].title = allProducts[random].name;
+
+    } while (previousImgs.includes(allProducts[random].name));
+
+    previousImgs[i] = allProducts[random].name;
+  }
 }
 
 showRandomProducts();
