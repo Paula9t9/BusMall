@@ -75,9 +75,6 @@ function showRandomProducts(){
   }
 
   console.table(allProducts);
-  console.log('Names: ' + names);
-  console.log(`Views: ${views}`);
-  console.log(`Clicks: ${clicks}`);
 }
 
 
@@ -102,6 +99,7 @@ function handleProductClick(event){
     // Used this to figure out why visibility wasn't changing: https://www.w3schools.com/jsref/prop_style_visibility.asp
     productBox.style.visibility = 'hidden';
     completeElement.style.visibility = 'visible';
+    displayChart();
   }
 
 }
@@ -114,6 +112,33 @@ function keepGoing(){
   else {
     return true;
   }
+}
+
+
+function displayChart() {
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart (ctx, {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [{
+        label: 'Number of Clicks',
+        data: clicks,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)'
+        ]
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
 }
 
 
