@@ -1,10 +1,12 @@
 
 /* Entire Document */
+
 * {
   margin: 0px auto;
 }
 
 /* Header */
+
 header {
   background-color: rgb(146, 185, 185);
   font-size: 20px;
