@@ -11,6 +11,12 @@ var completeElement = document.getElementById('complete');
 
 var allImageElements = [img1, img2, img3];
 var allProducts = [];
+var names = [];
+var views = [];
+var clicks = [];
+
+
+/* Object construction */
 
 // Got index idea from Ed to make finding objects easier
 function Product(name) {
@@ -43,6 +49,9 @@ new Product('usb');
 new Product('water-can');
 new Product('wine-glass');
 
+
+/* Function declarations */
+
 function showRandomProducts(){
 
   var previousImgs = [];
@@ -61,10 +70,23 @@ function showRandomProducts(){
 
     previousImgs[i] = allProducts[random].name;
     allProducts[random].views ++;
+    updateDataArrays();
 
   }
 
   console.table(allProducts);
+  console.log('Names: ' + names);
+  console.log(`Views: ${views}`);
+  console.log(`Clicks: ${clicks}`);
+}
+
+
+function updateDataArrays() {
+  for (var i = 0; i < allProducts.length; i++) {
+    names[i] = allProducts[i].name;
+    views[i] = allProducts[i].views;
+    clicks[i] = allProducts[i].clicks;
+  }
 }
 
 
@@ -74,6 +96,7 @@ function handleProductClick(event){
     allProducts[event.target.id].clicks ++;
     clicksRemaining --;
     clicksRemElement.innerHTML = clicksRemaining;
+    updateDataArrays();
     showRandomProducts();
   } else {
     // Used this to figure out why visibility wasn't changing: https://www.w3schools.com/jsref/prop_style_visibility.asp
@@ -82,6 +105,7 @@ function handleProductClick(event){
   }
 
 }
+
 
 function keepGoing(){
   if(clicksRemaining <= 0){
@@ -92,6 +116,8 @@ function keepGoing(){
   }
 }
 
+
+/* Execution */
 
 showRandomProducts();
 
