@@ -125,7 +125,29 @@ function displayChart() {
         label: 'Number of Clicks',
         data: clicks,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)'
+          // Grabbed colors from here: http://www.menucool.com/rgba-color-picker
+          'rgba(51,255,51,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0, 0, 0, 0.1)',
+          'rgba(51,255,51,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0, 0, 0, 0.1)',
+          'rgba(51,255,51,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0, 0, 0, 0.1)',
+          'rgba(51,255,51,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0, 0, 0, 0.1)',
+          'rgba(51,255,51,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0, 0, 0, 0.1)',
+          'rgba(51,255,51,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0, 0, 0, 0.1)',
+          'rgba(51,255,51,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0, 0, 0, 0.1)',
+          'rgba(51,255,51,0.2)',
         ]
       }]
     },
