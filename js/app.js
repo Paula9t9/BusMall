@@ -1,6 +1,6 @@
 'use strict';
 
-var clicksRemaining = 24;
+var clicksRemaining = 25;
 
 var img1 = document.getElementById('img1');
 var img2 = document.getElementById('img2');
@@ -21,7 +21,7 @@ var clickThroughArr = [];
 
 // Got index idea from Ed to make finding objects easier
 function Product(name) {
-  this.filepath = `../img/${name}.jpg`;
+  this.filepath = `img/${name}.jpg`;
   this.name = name;
   this.views = 0;
   this.clicks = 0;
@@ -107,7 +107,6 @@ function handleProductClick(event){
     productBox.style.visibility = 'hidden';
     completeElement.style.visibility = 'visible';
     displayChart();
-    showProductsAsList();
   }
 
 }
@@ -119,16 +118,6 @@ function keepGoing(){
   }
   else {
     return true;
-  }
-}
-
-function showProductsAsList() {
-  var productListElement = document.getElementById('product-list');
-  productListElement.innerHTML = '';
-  for (var i = 0; i < allProducts.length; i++) {
-    var liEl = document.createElement('li');
-    liEl.textContent = allProducts[i].name + ', ' + allProducts[i].clicks + ' votes';
-    productListElement.appendChild(liEl);
   }
 }
 
