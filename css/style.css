@@ -16,6 +16,7 @@ header {
 
 h2 {
   max-width: 900px;
+  text-align: center;
   font-size: 40px;
 }
 
@@ -28,6 +29,7 @@ h3 {
 
 p {
   max-width: 900px;
+  text-align: center;
   font-size: 18px;
 }
 
@@ -46,6 +48,14 @@ section img {
   border: 1px dashed blue;
 }
 
+/* Complete State */
+
 #complete {
+  max-width: 900px;
+  margin: 0px auto;
   visibility: hidden;
+}
+
+#myChart {
+  margin: 0px auto;
 }
