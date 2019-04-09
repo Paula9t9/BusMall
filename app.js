@@ -11,9 +11,10 @@ var completeElement = document.getElementById('complete');
 
 var allImageElements = [img1, img2, img3];
 var allProducts = [];
-var names = [];
-var views = [];
-var clicks = [];
+var namesArr = [];
+var viewsArr = [];
+var clicksArr = [];
+var clickThroughArr = [];
 
 
 /* Object construction */
@@ -24,6 +25,7 @@ function Product(name) {
   this.name = name;
   this.views = 0;
   this.clicks = 0;
+  this.clickThrough = 0;
   this.index = allProducts.length;
   allProducts.push(this);
 }
@@ -80,9 +82,14 @@ function showRandomProducts(){
 
 function updateDataArrays() {
   for (var i = 0; i < allProducts.length; i++) {
-    names[i] = allProducts[i].name;
-    views[i] = allProducts[i].views;
-    clicks[i] = allProducts[i].clicks;
+    namesArr[i] = allProducts[i].name;
+    viewsArr[i] = allProducts[i].views;
+    clicksArr[i] = allProducts[i].clicks;
+    
+    //Caluclates the clickthrough percentage
+    allProducts[i].clickThrough = Math.round((allProducts[i].clicks/allProducts[i].views) * 100);
+    clickThroughArr[i] = allProducts[i].clickThrough;
+
   }
 }
 
@@ -120,35 +127,83 @@ function displayChart() {
   var myChart = new Chart (ctx, {
     type: 'bar',
     data: {
-      labels: names,
+      labels: namesArr,
       datasets: [{
         label: 'Number of Clicks',
-        data: clicks,
+        data: clicksArr,
         backgroundColor: [
           // Grabbed colors from here: http://www.menucool.com/rgba-color-picker
           'rgba(51,255,51,0.2)',
-          'rgba(0,51,204,0.2)',
-          'rgba(0, 0, 0, 0.1)',
           'rgba(51,255,51,0.2)',
-          'rgba(0,51,204,0.2)',
-          'rgba(0, 0, 0, 0.1)',
           'rgba(51,255,51,0.2)',
-          'rgba(0,51,204,0.2)',
-          'rgba(0, 0, 0, 0.1)',
           'rgba(51,255,51,0.2)',
-          'rgba(0,51,204,0.2)',
-          'rgba(0, 0, 0, 0.1)',
           'rgba(51,255,51,0.2)',
-          'rgba(0,51,204,0.2)',
-          'rgba(0, 0, 0, 0.1)',
           'rgba(51,255,51,0.2)',
-          'rgba(0,51,204,0.2)',
-          'rgba(0, 0, 0, 0.1)',
           'rgba(51,255,51,0.2)',
-          'rgba(0,51,204,0.2)',
-          'rgba(0, 0, 0, 0.1)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
+          'rgba(51,255,51,0.2)',
           'rgba(51,255,51,0.2)',
         ]
+      },
+      {
+        label: 'Number of Views',
+        data: viewsArr,
+        backgroundColor: [
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+          'rgba(0,51,204,0.2)',
+        ]
+      },
+      {
+        label: 'Clickthrough Percent',
+        data: clickThroughArr
       }]
     },
     options: {
