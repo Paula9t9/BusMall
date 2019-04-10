@@ -10,6 +10,7 @@ var clicksRemElement = document.getElementById('clicks-remaining');
 var completeElement = document.getElementById('complete');
 
 var allImageElements = [img1, img2, img3];
+var previousImgs = [];
 var allProducts = [];
 var namesArr = [];
 var viewsArr = [];
@@ -21,7 +22,7 @@ var clickThroughArr = [];
 
 // Got index idea from Ed to make finding objects easier
 function Product(name) {
-  this.filepath = `img/${name}.jpg`;
+  this.filepath = `../img/${name}.jpg`;
   this.name = name;
   this.views = 0;
   this.clicks = 0;
@@ -56,7 +57,14 @@ new Product('wine-glass');
 
 function showRandomProducts(){
 
-  var previousImgs = [];
+  if (previousImgs.length > 2){
+    previousImgs[3] = previousImgs[0];
+    previousImgs[4] = previousImgs[1];
+    previousImgs[5] = previousImgs[2];
+    console.log('Previous images added to end of array');
+  }
+
+
   for(var i = 0; i < 3; i++){
     var random = 0;
 
@@ -71,11 +79,11 @@ function showRandomProducts(){
     } while (previousImgs.includes(allProducts[random].name));
 
     previousImgs[i] = allProducts[random].name;
-    allProducts[random].views ++;
+    allProducts[random].views++;
     updateDataArrays();
 
   }
-
+  console.log('Previous images: ' + previousImgs);
   console.table(allProducts);
 }
 
@@ -85,7 +93,7 @@ function updateDataArrays() {
     namesArr[i] = allProducts[i].name;
     viewsArr[i] = allProducts[i].views;
     clicksArr[i] = allProducts[i].clicks;
-    
+
     //Caluclates the clickthrough percentage
     allProducts[i].clickThrough = Math.round((allProducts[i].clicks/allProducts[i].views) * 100);
     clickThroughArr[i] = allProducts[i].clickThrough;
@@ -97,7 +105,7 @@ function updateDataArrays() {
 function handleProductClick(event){
   if (keepGoing()){
     console.log('Clicked Event: ' + event.target.alt);
-    allProducts[event.target.id].clicks ++;
+    allProducts[event.target.id].clicks++;
     clicksRemaining --;
     clicksRemElement.innerHTML = clicksRemaining;
     updateDataArrays();
@@ -107,6 +115,7 @@ function handleProductClick(event){
     productBox.style.visibility = 'hidden';
     completeElement.style.visibility = 'visible';
     displayChart();
+    showProductsAsList();
   }
 
 }
@@ -115,9 +124,18 @@ function handleProductClick(event){
 function keepGoing(){
   if(clicksRemaining <= 0){
     return false;
-  }
-  else {
+  } else {
     return true;
+  }
+}
+
+function showProductsAsList() {
+  var productListElement = document.getElementById('product-list');
+  productListElement.innerHTML = '';
+  for (var i = 0; i < allProducts.length; i++) {
+    var liEl = document.createElement('li');
+    liEl.textContent = allProducts[i].name + ', ' + allProducts[i].clicks + ' votes';
+    productListElement.appendChild(liEl);
   }
 }
 
