@@ -31,29 +31,44 @@ function Product(name) {
   allProducts.push(this);
 }
 
-new Product('bag');
-new Product('banana');
-new Product('bathroom');
-new Product('boots');
-new Product('breakfast');
-new Product('bubblegum');
-new Product('chair');
-new Product('cthulhu');
-new Product('dog-duck');
-new Product('dragon');
-new Product('pen');
-new Product('pet-sweep');
-new Product('scissors');
-new Product('shark');
-new Product('sweep');
-new Product('tauntaun');
-new Product('unicorn');
-new Product('usb');
-new Product('water-can');
-new Product('wine-glass');
-
 
 /* Function declarations */
+
+function onLoad() {
+
+  if (localStorage.getItem("products") !== null){
+    console.log("Something found in storage");
+
+    allProducts = JSON.parse(localStorage.products);
+
+  } else {
+    console.log("Nothing in storage");
+
+    new Product('bag');
+    new Product('banana');
+    new Product('bathroom');
+    new Product('boots');
+    new Product('breakfast');
+    new Product('bubblegum');
+    new Product('chair');
+    new Product('cthulhu');
+    new Product('dog-duck');
+    new Product('dragon');
+    new Product('pen');
+    new Product('pet-sweep');
+    new Product('scissors');
+    new Product('shark');
+    new Product('sweep');
+    new Product('tauntaun');
+    new Product('unicorn');
+    new Product('usb');
+    new Product('water-can');
+    new Product('wine-glass');
+
+  }
+
+}
+
 
 function showRandomProducts(){
 
@@ -61,7 +76,6 @@ function showRandomProducts(){
     previousImgs[3] = previousImgs[0];
     previousImgs[4] = previousImgs[1];
     previousImgs[5] = previousImgs[2];
-    console.log('Previous images added to end of array');
   }
 
 
@@ -83,7 +97,6 @@ function showRandomProducts(){
     updateDataArrays();
 
   }
-  console.log('Previous images: ' + previousImgs);
   console.table(allProducts);
 }
 
@@ -116,6 +129,8 @@ function handleProductClick(event){
     completeElement.style.visibility = 'visible';
     displayChart();
     showProductsAsList();
+    storeProducts();
+    calculateTotalClicks();
   }
 
 }
@@ -128,6 +143,11 @@ function keepGoing(){
     return true;
   }
 }
+
+function storeProducts(){
+  localStorage.products = JSON.stringify(allProducts);
+}
+
 
 function showProductsAsList() {
   var productListElement = document.getElementById('product-list');
@@ -237,9 +257,21 @@ function displayChart() {
 }
 
 
+//A helper function to test the accuracy of click totals
+function calculateTotalClicks() {
+  var totalClicks = 0;
+  for (var i = 0; i < allProducts.length; i++){
+    totalClicks += allProducts[i].clicks;
+  }
+  console.log(`Total Clicks: ${totalClicks}`);
+}
+
+
 /* Execution */
 
+onLoad();
 showRandomProducts();
+calculateTotalClicks();
 
 productBox.addEventListener('click', handleProductClick);
 
